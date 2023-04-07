@@ -2,7 +2,7 @@
     package="com.example.free_api">
     <uses-permission android:name="android.permission.INTERNET"/>
    <application
-        android:label="free_api"
+        android:label="Ecommerce App"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
