@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:free_api/screens/home_screen.dart';
-import 'package:free_api/screens/splash%20screen/splash_screen.dart';
-
+import 'package:free_api/view/splash%20screen/splash_screen.dart';
 void main() {
   runApp(const MyApp());
 }

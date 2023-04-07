@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:free_api/model/product_model.dart';
-import 'package:free_api/repo/product_repo.dart';
+import '../controller/product_repo.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,12 +15,13 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: const Color(0xffF7F2FF),
         appBar: AppBar(
           automaticallyImplyLeading: false,
-          title: const Text("All Product"),centerTitle: true,
+          title: const Text("All Product"),
+          centerTitle: true,
         ),
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: FutureBuilder<ProductModel>(
-            future: ProductRepo().getData(),
+            future: ProductController().getData(),
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 return GridView.builder(
@@ -37,7 +38,8 @@ class _HomeScreenState extends State<HomeScreen> {
                         height: 290,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10),
-                            color: Colors.white),
+                            color: Colors.white,
+                        ),
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Column(
@@ -46,8 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             children: [
                               Center(
                                   child: Image.network(
-                                snapshot.data!.products[index].thumbnail
-                                    .toString(),
+                                snapshot.data!.products[index].thumbnail.toString(),
                                 height: 70,
                               )),
                               const SizedBox(
@@ -58,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                   snapshot.data!.products[index].title.toString(),
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
-                                    fontSize: 12
+                                    fontSize: 12,
                                   ),
                                 ),
                               ),
@@ -71,25 +72,59 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   Row(
                                     children: [
-                                      const Text("Price:",style: TextStyle(color: Color(0xff646464),fontWeight: FontWeight.bold),),
-                                      const SizedBox(width: 3,),
-                                      Text("${snapshot.data!.products[index].price.toString()}\$",style: const TextStyle(color: Color(0xffDA2079),fontWeight: FontWeight.bold),),
+                                      const Text(
+                                        "Price:",
+                                        style: TextStyle(
+                                          color: Color(0xff646464),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const SizedBox(
+                                        width: 3,
+                                      ),
+                                      Text(
+                                        "${snapshot.data!.products[index].price.toString()}\$",
+                                        style: const TextStyle(
+                                          color: Color(0xffDA2079),
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
                                     ],
                                   ),
                                   Text(
                                     "${snapshot.data!.products[index].discountPercentage.toString()}\$",
-                                    style: const TextStyle(color: Colors.red,fontWeight: FontWeight.bold,decoration: TextDecoration.lineThrough,
+                                    style: const TextStyle(
+                                      color: Colors.red,
+                                      fontWeight: FontWeight.bold,
+                                      decoration: TextDecoration.lineThrough,
                                     ),
                                   )
                                 ],
                               ),
-                              const SizedBox(height: 5,),
+                              const SizedBox(
+                                height: 5,
+                              ),
                               Row(
-                               crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text("Stock:",style: TextStyle(color: Color(0xff646464),fontWeight: FontWeight.bold),),
-                                  const SizedBox(width: 3,),
-                                  Text(snapshot.data!.products[index].stock.toString(),style: const TextStyle(color: Color(0xffDA2079),fontWeight: FontWeight.bold),),
+                                  const Text(
+                                    "Stock:",
+                                    style: TextStyle(
+                                      color: Color(0xff646464),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(
+                                    snapshot.data!.products[index].stock
+                                        .toString(),
+                                    style: const TextStyle(
+                                      color: Color(0xffDA2079),
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ],
